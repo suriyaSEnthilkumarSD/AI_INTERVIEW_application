@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from app.database.mongodb import client, create_indexes
 from app.routers.auth import router as auth_router
-
+from app.routers.problem import router as problem_router 
 from app.routers.user import router as user_router
 app = FastAPI(
     title="AI Technical Interview Platform"
@@ -35,3 +35,10 @@ def test_database():
             "message": "MongoDB connection failed",
             "error": str(e)
         }
+
+
+#admin
+from app.routers.admin import router as admin_router
+app.include_router(admin_router)
+
+app.include_router(problem_router)

@@ -12,7 +12,7 @@ class User(BaseModel):
     username: str
     email: EmailStr
     password_hash: str
-
+    role: str = "user"
     is_verified: bool = False
 
     otp_hash: str | None = None

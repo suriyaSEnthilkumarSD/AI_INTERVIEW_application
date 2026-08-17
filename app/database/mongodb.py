@@ -12,6 +12,7 @@ database = client[settings.database_name]
 
 users_collection = database["users"]
 refresh_tokens_collection = database["refresh_tokens"]
+problems_collection = database["problems"]
 refresh_tokens_collection.create_index(
     "expires_at",
     expireAfterSeconds=0,

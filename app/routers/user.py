@@ -19,3 +19,15 @@ def get_my_profile(
         "username": current_user["username"],
         "email": current_user["email"],
     }
+
+#temporary admin check
+# from app.dependencies.auth import get_current_admin
+# @router.get("/admin-test")
+# def admin_test(
+#     admin = Depends(get_current_admin)
+# ):
+#     return {
+#         "message": "You are an admin",
+#         "user_id": admin["user_id"],
+#         "role": admin.get("role", "user")
+#     }
