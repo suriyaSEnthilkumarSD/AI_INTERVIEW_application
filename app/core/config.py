@@ -13,6 +13,14 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_access_token_expire_minutes: int = 30
     jwt_refresh_token_expire_days: int = 7
+    docker_path: str
+    docker_path: str
+    sandbox_image: str = "code-sandbox"
+    sandbox_memory_limit: str = "128m"
+    sandbox_cpu_limit: float = 1
+    sandbox_pids_limit: int = 64
+    sandbox_tmpfs_size: str = "16m"
+    sandbox_timeout_buffer: int = 5
 
     model_config = SettingsConfigDict(
         env_file=".env",
