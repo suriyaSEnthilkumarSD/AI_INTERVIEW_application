@@ -1,28 +1,51 @@
-# Virtual environment
-.venv/
-venv/
-env/
+# =========================
+# Backend - Python / FastAPI
+# =========================
 
-# Environment variables / secrets
-.env
-.env.*
+Fastapi/.venv/
+Fastapi/venv/
+Fastapi/env/
 
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
+Fastapi/.env
+Fastapi/.env.*
 
+Fastapi/**/__pycache__/
+Fastapi/**/*.py[cod]
+Fastapi/**/*.pyo
+
+Fastapi/.pytest_cache/
+Fastapi/.coverage
+
+# =========================
+# Frontend - React / Vite
+# =========================
+
+frontend/node_modules/
+frontend/dist/
+
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# =========================
 # IDE
+# =========================
+
 .idea/
 .vscode/
 
+# =========================
 # OS
+# =========================
+
 .DS_Store
 Thumbs.db
 
-# Testing
-.pytest_cache/
-.coverage
-
+# =========================
 # Logs
+# =========================
+
 *.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
