@@ -19,6 +19,8 @@ refresh_tokens_collection.create_index(
     expireAfterSeconds=0,
 )
 
+problem_progress_collection = database["problem_progress"]
+
 def create_indexes():
     users_collection.create_index(
         "user_id",
@@ -32,5 +34,13 @@ def create_indexes():
 
     users_collection.create_index(
         "email",
+        unique=True
+    )
+
+    problem_progress_collection.create_index(
+        [
+            ("user_id", 1),
+            ("problem_id", 1),
+        ],
         unique=True
     )

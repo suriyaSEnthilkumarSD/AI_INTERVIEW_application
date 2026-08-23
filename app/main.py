@@ -4,13 +4,18 @@ from app.database.mongodb import client, create_indexes
 from app.routers.auth import router as auth_router
 from app.routers.problem import router as problem_router 
 from app.routers.user import router as user_router
-from app.routers import submission
+from app.routers import dashboard, submission
+from app.routers.progress import router as progress_router
+from app.routers.ai import router as ai_router
 app = FastAPI(
     title="AI Technical Interview Platform"
 )
 
 app.include_router(user_router)
+app.include_router(ai_router)
+app.include_router(progress_router)
 app.include_router(submission.router)
+app.include_router(dashboard.router)
 create_indexes()
 
 app.include_router(auth_router)

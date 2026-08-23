@@ -7,7 +7,13 @@ from app.database.mongodb import (
     submissions_collection,
 )
 from app.models.submission import Submission
-from app.schemas.submission import SubmissionCreate
+from app.schemas.submission import (
+    SubmissionCreate,
+    SubmissionStatus,
+)
+from app.services.problem_progress_service import (
+    update_problem_progress,
+)
 from app.services.execution_service import execute_python_code
 
 
@@ -130,9 +136,19 @@ def create_submission(
     )
 
     # Update submission result
+    # Update submission result
     update_submission_result(
         submission_id=submission.submission_id,
         execution_result=execution_result,
+    )
+
+    # Update problem progress
+    update_problem_progress(
+        user_id=user_id,
+        problem_id=submission_data.problem_id,
+        submission_status=SubmissionStatus(
+            execution_result["status"]
+        ),
     )
 
     # Return updated submission
