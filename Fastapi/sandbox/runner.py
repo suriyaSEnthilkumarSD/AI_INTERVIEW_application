@@ -4,6 +4,12 @@ import signal
 import sys
 import time
 
+from typing import *
+from collections import *
+from heapq import *
+from bisect import *
+from math import *
+
 
 class ExecutionTimeout(Exception):
     pass
@@ -63,9 +69,52 @@ def main():
         total_execution_time = 0.0
         total_test_cases = len(test_cases)
 
+        # Common imports available automatically
+        # to user submissions.
+        execution_namespace = {
+            # Typing
+            "List": List,
+            "Optional": Optional,
+            "Dict": Dict,
+            "Set": Set,
+            "Tuple": Tuple,
+            "Any": Any,
+
+            # Collections
+            "Counter": Counter,
+            "defaultdict": defaultdict,
+            "deque": deque,
+
+            # Heap
+            "heappush": heappush,
+            "heappop": heappop,
+            "heapify": heapify,
+            "heappushpop": heappushpop,
+            "heapreplace": heapreplace,
+            "nlargest": nlargest,
+            "nsmallest": nsmallest,
+
+            # Binary search
+            "bisect_left": bisect_left,
+            "bisect_right": bisect_right,
+            "bisect": bisect,
+            "insort": insort,
+
+            # Math
+            "inf": inf,
+            "sqrt": sqrt,
+            "ceil": ceil,
+            "floor": floor,
+            "gcd": gcd,
+            "lcm": lcm,
+            "factorial": factorial,
+        }
+
         # Execute submitted code once
-        execution_namespace = {}
-        exec(source_code, execution_namespace)
+        exec(
+            source_code,
+            execution_namespace,
+        )
 
         # Validate Solution class
         if "Solution" not in execution_namespace:

@@ -1,0 +1,1650 @@
+/* =========================================
+   PROBLEM DETAIL PAGE
+========================================= */
+
+.problem-workspace {
+  height: 100vh;
+
+  padding: 20px;
+
+  background: #020617;
+  color: #e2e8f0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   LOADING / ERROR
+========================================= */
+
+.problem-loading,
+.problem-error-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  background: #020617;
+  color: #cbd5e1;
+}
+
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+
+  border: 3px solid #1e293b;
+  border-top-color: #3b82f6;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.problem-error-page h2 {
+  margin: 0;
+
+  color: #f8fafc;
+}
+
+
+.problem-error-page p {
+  margin: 0;
+
+  color: #94a3b8;
+}
+
+
+.back-button {
+  color: #60a5fa;
+
+  text-decoration: none;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.problem-workspace-header {
+  flex-shrink: 0;
+
+  margin-bottom: 16px;
+}
+
+
+.problem-back-link {
+  display: inline-block;
+
+  margin-bottom: 14px;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  transition: color 0.2s;
+}
+
+
+.problem-back-link:hover {
+  color: #60a5fa;
+}
+
+
+.problem-title-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+.problem-title-row h1 {
+  margin: 0;
+
+  color: #f8fafc;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+
+
+.problem-meta {
+  display: flex;
+
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+
+.topic-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+
+/* =========================================
+   DIFFICULTY BADGES
+========================================= */
+
+.difficulty-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+.difficulty-easy {
+  color: #4ade80;
+
+  background:
+    rgba(34, 197, 94, 0.1);
+
+  border:
+    1px solid rgba(34, 197, 94, 0.3);
+}
+
+
+.difficulty-medium {
+  color: #fbbf24;
+
+  background:
+    rgba(245, 158, 11, 0.1);
+
+  border:
+    1px solid rgba(245, 158, 11, 0.3);
+}
+
+
+.difficulty-hard {
+  color: #f87171;
+
+  background:
+    rgba(239, 68, 68, 0.1);
+
+  border:
+    1px solid rgba(239, 68, 68, 0.3);
+}
+
+
+/* =========================================
+   TOPIC TAGS
+========================================= */
+
+.topic-tag {
+  padding: 7px 12px;
+
+  border-radius: 7px;
+
+  background: #172033;
+
+  border: 1px solid #243149;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   MAIN TWO COLUMN LAYOUT
+========================================= */
+
+.problem-layout {
+  flex: 1;
+
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(380px, 42%)
+    minmax(0, 58%);
+
+  gap: 18px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   LEFT PROBLEM PANEL
+========================================= */
+
+.problem-description-panel {
+  min-height: 0;
+
+  overflow-y: auto;
+
+  padding: 26px;
+
+  background: #111a2b;
+
+  border: 1px solid #22304a;
+
+  border-radius: 14px;
+}
+
+
+/* LEFT PANEL SCROLLBAR */
+
+.problem-description-panel::-webkit-scrollbar {
+  width: 7px;
+}
+
+
+.problem-description-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.problem-description-panel::-webkit-scrollbar-thumb {
+  background: #475569;
+
+  border-radius: 10px;
+}
+
+
+.problem-description-panel::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+
+/* =========================================
+   PROBLEM SECTIONS
+========================================= */
+
+.problem-section {
+  margin-bottom: 34px;
+}
+
+
+.problem-section:last-child {
+  margin-bottom: 0;
+}
+
+
+.problem-section h2 {
+  margin: 0 0 16px;
+
+  color: #f1f5f9;
+
+  font-size: 19px;
+
+  font-weight: 650;
+}
+
+
+.problem-description-text {
+  margin: 0;
+
+  color: #cbd5e1;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+  white-space: pre-line;
+}
+
+
+/* =========================================
+   CONSTRAINTS
+========================================= */
+
+.constraints-list {
+  margin: 0;
+
+  padding-left: 22px;
+
+  color: #cbd5e1;
+
+  line-height: 2;
+}
+
+
+.constraints-list li {
+  padding-left: 4px;
+}
+
+
+/* =========================================
+   INPUT / OUTPUT
+========================================= */
+
+.problem-info-box {
+  padding: 16px;
+
+  background: #152033;
+
+  border: 1px solid #2a3a55;
+
+  border-radius: 10px;
+
+  color: #cbd5e1;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   EXAMPLES / TEST CASES
+========================================= */
+
+.example-card {
+  margin-bottom: 14px;
+
+  padding: 16px;
+
+  background: #0d1626;
+
+  border: 1px solid #263650;
+
+  border-radius: 10px;
+}
+
+
+.example-card:last-child {
+  margin-bottom: 0;
+}
+
+
+.example-card h3 {
+  margin: 0 0 16px;
+
+  color: #93c5fd;
+
+  font-size: 14px;
+}
+
+
+.example-row {
+  margin-bottom: 14px;
+}
+
+
+.example-row:last-child {
+  margin-bottom: 0;
+}
+
+
+.example-row > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+.example-row pre {
+  margin: 0;
+
+  padding: 12px;
+
+  overflow-x: auto;
+
+  background: #020617;
+
+  border-radius: 7px;
+
+  color: #cbd5e1;
+
+  font-family:
+    "Fira Code",
+    "Cascadia Code",
+    Consolas,
+    monospace;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   HINTS
+========================================= */
+
+.hint-card {
+  margin-bottom: 10px;
+
+  background: #101a2b;
+
+  border: 1px solid #263650;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+
+.hint-card summary {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px 16px;
+
+  cursor: pointer;
+
+  color: #cbd5e1;
+
+  list-style: none;
+}
+
+
+.hint-card summary::-webkit-details-marker {
+  display: none;
+}
+
+
+.hint-card p {
+  margin: 0;
+
+  padding:
+    0
+    16px
+    16px;
+
+  color: #94a3b8;
+
+  line-height: 1.7;
+}
+
+
+.empty-hints {
+  color: #64748b;
+}
+
+
+/* =========================================
+   RIGHT WORKSPACE
+========================================= */
+
+.right-workspace {
+  min-width: 0;
+
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+  overflow-y: auto;
+
+  padding-right: 2px;
+}
+
+
+/* RIGHT WORKSPACE SCROLLBAR */
+
+.right-workspace::-webkit-scrollbar {
+  width: 7px;
+}
+
+
+.right-workspace::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.right-workspace::-webkit-scrollbar-thumb {
+  background: #475569;
+
+  border-radius: 10px;
+}
+
+
+.right-workspace::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+
+/* =========================================
+   EDITOR PANEL
+========================================= */
+
+.editor-panel {
+  flex-shrink: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  /*
+     Large editor area.
+     Header + Monaco Editor + Status + Buttons
+  */
+
+  height: 68vh;
+
+  min-height: 520px;
+
+  background: #0b1120;
+
+  border: 1px solid #22304a;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   EDITOR HEADER
+========================================= */
+
+.editor-header {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 14px 18px;
+
+  background: #151f30;
+
+  border-bottom: 1px solid #263650;
+}
+
+
+.editor-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #e2e8f0;
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+
+.editor-status-dot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #4ade80;
+
+  box-shadow:
+    0 0 10px
+    rgba(74, 222, 128, 0.6);
+}
+
+
+/* =========================================
+   LANGUAGE SELECT
+========================================= */
+
+.language-select {
+  min-width: 180px;
+
+  padding: 10px 14px;
+
+  background: #020617;
+
+  border: 1px solid #334155;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  color: #e2e8f0;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: border-color 0.2s;
+}
+
+
+.language-select:focus {
+  border-color: #3b82f6;
+}
+
+
+/* =========================================
+   LANGUAGE COMING SOON
+========================================= */
+
+.language-coming-soon {
+  flex-shrink: 0;
+
+  padding: 12px 18px;
+
+  background:
+    rgba(245, 158, 11, 0.08);
+
+  border-bottom:
+    1px solid
+    rgba(245, 158, 11, 0.2);
+
+  color: #fbbf24;
+
+  text-align: center;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   MONACO CODE EDITOR
+========================================= */
+
+.code-editor-wrapper {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #090f1c;
+}
+
+
+/*
+   Make Monaco completely fill
+   the available editor space.
+*/
+
+.code-editor-wrapper .monaco-editor,
+.code-editor-wrapper .overflow-guard {
+  width: 100% !important;
+
+  height: 100% !important;
+}
+
+
+/* Monaco editor background */
+
+.code-editor-wrapper {
+  background: #090f1c;
+}
+
+
+/*
+   Better scrollbar appearance
+*/
+
+.code-editor-wrapper
+.monaco-scrollable-element
+.scrollbar
+.slider {
+  border-radius: 8px;
+}
+
+
+/* =========================================
+   EDITOR STATUS BAR
+========================================= */
+
+.editor-status-bar {
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 22px;
+
+  padding: 10px 18px;
+
+  background: #151f30;
+
+  border-top: 1px solid #263650;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+
+.editor-status-bar span:first-child {
+  margin-right: auto;
+
+  color: #86efac;
+}
+
+
+/* =========================================
+   EDITOR ACTION BUTTONS
+========================================= */
+
+.editor-actions {
+  flex-shrink: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(140px, 0.3fr)
+    minmax(0, 1fr);
+
+  gap: 12px;
+
+  padding: 14px 16px;
+
+  background: #111a2b;
+
+  border-top: 1px solid #263650;
+}
+
+
+/* =========================================
+   RUN BUTTON
+========================================= */
+
+.run-code-button {
+  padding: 13px 18px;
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.5);
+
+  border-radius: 8px;
+
+  background: #101c22;
+
+  color: #e2e8f0;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.15s;
+}
+
+
+.run-code-button:hover:not(:disabled) {
+  background:
+    rgba(34, 197, 94, 0.1);
+
+  border-color: #22c55e;
+
+  transform: translateY(-1px);
+}
+
+
+.run-code-button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.submit-code-button {
+  padding: 13px 22px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s,
+    opacity 0.2s,
+    box-shadow 0.2s;
+}
+
+
+.submit-code-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 18px
+    rgba(37, 99, 235, 0.25);
+}
+
+
+.submit-code-button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================
+   SUBMISSION ERROR
+========================================= */
+
+.submission-error {
+  flex-shrink: 0;
+
+  padding: 15px 18px;
+
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.25);
+
+  border-radius: 10px;
+
+  color: #fca5a5;
+}
+
+
+.submission-error strong {
+  display: block;
+
+  margin-bottom: 5px;
+}
+
+
+.submission-error p {
+  margin: 0;
+
+  font-size: 14px;
+}
+
+
+/* =========================================
+   OUTPUT PANEL
+========================================= */
+
+.output-panel {
+  flex-shrink: 0;
+
+  min-height: 230px;
+
+  background: #111a2b;
+
+  border: 1px solid #22304a;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+
+.output-header {
+  display: flex;
+
+  align-items: center;
+
+  padding: 16px 20px;
+
+  background: #151f30;
+
+  border-bottom: 1px solid #263650;
+}
+
+
+.output-header h2 {
+  margin: 0;
+
+  color: #dbeafe;
+
+  font-size: 15px;
+}
+
+
+/* =========================================
+   EMPTY OUTPUT
+========================================= */
+
+.empty-output {
+  min-height: 180px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  color: #64748b;
+}
+
+
+.output-icon {
+  margin-bottom: 14px;
+
+  color: #475569;
+
+  font-size: 36px;
+}
+
+
+.empty-output p {
+  margin: 0;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   SUBMISSION RESULT
+========================================= */
+
+.submission-result {
+  padding: 20px;
+}
+
+
+.submission-result-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+
+.submission-result-header h3 {
+  margin: 0;
+
+  color: #f8fafc;
+
+  font-size: 16px;
+}
+
+
+.submission-status {
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* ACCEPTED */
+
+.submission-status.accepted {
+  color: #4ade80;
+
+  background:
+    rgba(34, 197, 94, 0.1);
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.2);
+}
+
+
+/* FAILED / ERROR */
+
+.submission-status.failed,
+.submission-status.error,
+.submission-status.runtime_error {
+  color: #f87171;
+
+  background:
+    rgba(239, 68, 68, 0.1);
+
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.2);
+}
+
+
+/* =========================================
+   SUBMISSION STATS
+========================================= */
+
+.submission-stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+.submission-stat {
+  padding: 14px;
+
+  background: #0d1626;
+
+  border: 1px solid #263650;
+
+  border-radius: 9px;
+}
+
+
+.submission-stat span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
+
+
+.submission-stat strong {
+  color: #e2e8f0;
+
+  font-size: 15px;
+}
+
+
+/* =========================================
+   SUBMISSION ID
+========================================= */
+
+.submission-id {
+  margin-top: 18px;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+
+.submission-id code {
+  margin-left: 8px;
+
+  color: #93c5fd;
+
+  font-family:
+    "Fira Code",
+    Consolas,
+    monospace;
+}
+
+
+/* =========================================
+   RUNTIME ERROR
+========================================= */
+
+.submission-runtime-error {
+  margin-top: 18px;
+
+  padding: 15px;
+
+  overflow-x: auto;
+
+  background:
+    rgba(239, 68, 68, 0.06);
+
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.18);
+
+  border-radius: 9px;
+
+  color: #fca5a5;
+}
+
+
+.submission-runtime-error pre {
+  margin: 10px 0 0;
+
+  white-space: pre-wrap;
+
+  font-family:
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+  .problem-workspace {
+    height: auto;
+
+    min-height: 100vh;
+
+    overflow: visible;
+  }
+
+
+  .problem-layout {
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: visible;
+  }
+
+
+  .problem-description-panel {
+    max-height: none;
+
+    overflow: visible;
+  }
+
+
+  .right-workspace {
+    overflow: visible;
+  }
+
+
+  .editor-panel {
+    height: 650px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .problem-workspace {
+    padding: 14px;
+  }
+
+
+  .problem-title-row {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+
+  .problem-title-row h1 {
+    font-size: 23px;
+  }
+
+
+  .problem-description-panel {
+    padding: 20px;
+  }
+
+
+  .editor-panel {
+    min-height: 500px;
+
+    height: 70vh;
+  }
+
+
+  .editor-header {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .language-select {
+    width: 100%;
+  }
+
+
+  .editor-actions {
+    grid-template-columns: 1fr;
+  }
+
+
+  .editor-status-bar {
+    gap: 10px;
+
+    flex-wrap: wrap;
+  }
+
+
+  .submission-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .problem-section h2 {
+    font-size: 17px;
+  }
+
+}
+
+/* =========================================
+   RUN CODE BUTTON LOADING
+========================================= */
+
+.run-code-button:disabled,
+.submit-code-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   OUTPUT RESULT STATUS COLORS
+========================================= */
+
+/* Accepted */
+
+.submission-status.accepted {
+  color: #4ade80;
+
+  background:
+    rgba(34, 197, 94, 0.1);
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.3);
+}
+
+
+/* Wrong Answer */
+
+.submission-status.wrong-answer {
+  color: #f87171;
+
+  background:
+    rgba(239, 68, 68, 0.1);
+
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.3);
+}
+
+
+/* Runtime Error */
+
+.submission-status.runtime-error {
+  color: #fb7185;
+
+  background:
+    rgba(244, 63, 94, 0.1);
+
+  border:
+    1px solid
+    rgba(244, 63, 94, 0.3);
+}
+
+
+/* Time Limit Exceeded */
+
+.submission-status.time-limit-exceeded {
+  color: #fbbf24;
+
+  background:
+    rgba(245, 158, 11, 0.1);
+
+  border:
+    1px solid
+    rgba(245, 158, 11, 0.3);
+}
+
+
+/* Memory Limit Exceeded */
+
+.submission-status.memory-limit-exceeded {
+  color: #c084fc;
+
+  background:
+    rgba(168, 85, 247, 0.1);
+
+  border:
+    1px solid
+    rgba(168, 85, 247, 0.3);
+}
+
+
+/* Compilation Error */
+
+.submission-status.compilation-error {
+  color: #fb923c;
+
+  background:
+    rgba(249, 115, 22, 0.1);
+
+  border:
+    1px solid
+    rgba(249, 115, 22, 0.3);
+}
+
+
+/* =========================================
+   TEST CASE RESULTS
+========================================= */
+
+.test-case-results {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  margin-top: 20px;
+}
+
+
+.test-case-result {
+  padding: 15px;
+
+  background: #0d1626;
+
+  border: 1px solid #263650;
+
+  border-radius: 10px;
+}
+
+
+.test-case-result.passed {
+  border-left:
+    3px solid #22c55e;
+}
+
+
+.test-case-result.failed {
+  border-left:
+    3px solid #ef4444;
+}
+
+
+/* =========================================
+   TEST CASE HEADER
+========================================= */
+
+.test-case-result-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+
+.test-case-result-header h4 {
+  margin: 0;
+
+  color: #e2e8f0;
+
+  font-size: 14px;
+}
+
+
+.test-case-status {
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.test-case-status.passed {
+  color: #4ade80;
+
+  background:
+    rgba(34, 197, 94, 0.1);
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.25);
+}
+
+
+.test-case-status.failed {
+  color: #f87171;
+
+  background:
+    rgba(239, 68, 68, 0.1);
+
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.25);
+}
+
+
+/* =========================================
+   TEST CASE DATA
+========================================= */
+
+.test-case-data {
+  display: grid;
+
+  gap: 10px;
+}
+
+
+.test-case-data-row {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+
+.test-case-data-row span {
+  color: #64748b;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+
+.test-case-data-row pre {
+  margin: 0;
+
+  padding: 11px 12px;
+
+  overflow-x: auto;
+
+  background: #020617;
+
+  border: 1px solid #1e293b;
+
+  border-radius: 7px;
+
+  color: #cbd5e1;
+
+  font-family:
+    "Fira Code",
+    "Cascadia Code",
+    Consolas,
+    monospace;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   TEST CASE ERROR
+========================================= */
+
+.test-case-error {
+  margin-top: 12px;
+
+  padding: 12px;
+
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.2);
+
+  border-radius: 7px;
+
+  color: #fca5a5;
+}
+
+
+.test-case-error strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 12px;
+}
+
+
+.test-case-error pre {
+  margin: 0;
+
+  white-space: pre-wrap;
+
+  font-family:
+    "Fira Code",
+    Consolas,
+    monospace;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   RESULT DIVIDER
+========================================= */
+
+.result-divider {
+  height: 1px;
+
+  margin: 20px 0;
+
+  background: #263650;
+}
+
+
+/* =========================================
+   RUN RESULT LABEL
+========================================= */
+
+.run-result-label {
+  margin-bottom: 18px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+}
+
+
+.run-result-label strong {
+  color: #e2e8f0;
+}
+
+
+/* =========================================
+   RESPONSIVE TEST RESULTS
+========================================= */
+
+@media (max-width: 700px) {
+
+  .test-case-result-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+
+  .test-case-data-row pre {
+    font-size: 11px;
+  }
+
+}

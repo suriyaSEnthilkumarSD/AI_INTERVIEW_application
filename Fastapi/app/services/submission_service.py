@@ -6,22 +6,35 @@ from app.database.mongodb import (
     problems_collection,
     submissions_collection,
 )
+
 from app.models.submission import Submission
+
 from app.schemas.submission import (
     SubmissionCreate,
     SubmissionStatus,
+    RunCodeRequest,
 )
+
 from app.services.problem_progress_service import (
     update_problem_progress,
 )
-from app.services.execution_service import execute_python_code
 
+from app.services.execution_service import (
+    execute_python_code,
+)
+
+
+# =========================================
+# GET PROBLEM
+# =========================================
 
 def get_problem_or_404(
     problem_id: int,
 ):
     problem = problems_collection.find_one(
-        {"problem_id": problem_id}
+        {
+            "problem_id": problem_id
+        }
     )
 
     if not problem:
@@ -32,6 +45,10 @@ def get_problem_or_404(
 
     return problem
 
+
+# =========================================
+# VALIDATE LANGUAGE
+# =========================================
 
 def validate_submission_language(
     problem: dict,
@@ -51,6 +68,10 @@ def validate_submission_language(
         )
 
 
+# =========================================
+# UPDATE SUBMISSION RESULT
+# =========================================
+
 def update_submission_result(
     submission_id: str,
     execution_result: dict,
@@ -62,25 +83,138 @@ def update_submission_result(
         {
             "$set": {
                 "status": execution_result["status"],
-                "test_cases_passed": execution_result[
-                    "test_cases_passed"
-                ],
-                "total_test_cases": execution_result[
-                    "total_test_cases"
-                ],
-                "execution_time": execution_result[
-                    "execution_time"
-                ],
-                "memory_used": execution_result.get(
-                    "memory_used"
-                ),
-                "updated_at": datetime.now(
-                    timezone.utc
-                ),
+
+                "test_cases_passed":
+                    execution_result[
+                        "test_cases_passed"
+                    ],
+
+                "total_test_cases":
+                    execution_result[
+                        "total_test_cases"
+                    ],
+
+                "execution_time":
+                    execution_result[
+                        "execution_time"
+                    ],
+
+                "memory_used":
+                    execution_result.get(
+                        "memory_used"
+                    ),
+
+                "error":
+                    execution_result.get(
+                        "error"
+                    ),
+
+                "updated_at":
+                    datetime.now(
+                        timezone.utc
+                    ),
             }
         },
     )
 
+
+# =========================================
+# RUN CODE
+#
+# IMPORTANT:
+# - NO DATABASE INSERT
+# - NO PROGRESS UPDATE
+# - ONLY PUBLIC TEST CASES
+# =========================================
+
+def run_code(
+    run_data: RunCodeRequest,
+):
+    # Get problem
+    problem = get_problem_or_404(
+        run_data.problem_id
+    )
+
+    # Validate language
+    validate_submission_language(
+        problem=problem,
+        language=run_data.language.value,
+    )
+
+    # Currently only Python execution exists
+    if run_data.language.value != "python":
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                f"{run_data.language.value} "
+                "execution is currently unavailable"
+            ),
+        )
+
+    # Get function signature
+    function_signature = (
+        problem["code"]["functionSignature"]
+    )
+
+    function_name = (
+        function_signature["name"]
+    )
+
+    parameter_names = [
+        parameter["name"]
+        for parameter in (
+            function_signature["parameters"]
+        )
+    ]
+
+    # =====================================
+    # ONLY PUBLIC TEST CASES
+    # =====================================
+
+    public_test_cases = [
+        test_case
+        for test_case in (
+            problem["evaluation"]["testCases"]
+        )
+        if test_case.get("visibility") == "public"
+    ]
+
+    if not public_test_cases:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                "No public test cases are "
+                "available for this problem"
+            ),
+        )
+
+    # =====================================
+    # EXECUTE CODE
+    # =====================================
+
+    execution_result = execute_python_code(
+        source_code=run_data.source_code,
+
+        function_name=function_name,
+
+        parameter_names=parameter_names,
+
+        test_cases=public_test_cases,
+    )
+
+    # IMPORTANT:
+    # Return directly.
+    #
+    # No MongoDB insert.
+    # No submission creation.
+    # No progress update.
+
+    return execution_result
+
+
+# =========================================
+# CREATE SUBMISSION
+# =========================================
 
 def create_submission(
     submission_data: SubmissionCreate,
@@ -97,7 +231,7 @@ def create_submission(
         language=submission_data.language.value,
     )
 
-    # Create submission
+    # Create submission object
     submission = Submission(
         user_id=user_id,
         problem_id=submission_data.problem_id,
@@ -110,32 +244,42 @@ def create_submission(
         submission.model_dump()
     )
 
-    # Currently only Python execution is supported
+    # Currently only Python execution
     if submission_data.language.value != "python":
         return submission
 
+    # Get function signature
     function_signature = (
         problem["code"]["functionSignature"]
     )
 
-    function_name = function_signature["name"]
+    function_name = (
+        function_signature["name"]
+    )
 
     parameter_names = [
         parameter["name"]
-        for parameter in function_signature["parameters"]
+        for parameter in (
+            function_signature["parameters"]
+        )
     ]
 
-    test_cases = problem["evaluation"]["testCases"]
+    # Submit uses ALL test cases
+    test_cases = (
+        problem["evaluation"]["testCases"]
+    )
 
     # Execute code
     execution_result = execute_python_code(
         source_code=submission_data.source_code,
+
         function_name=function_name,
+
         parameter_names=parameter_names,
+
         test_cases=test_cases,
     )
 
-    # Update submission result
     # Update submission result
     update_submission_result(
         submission_id=submission.submission_id,
@@ -154,10 +298,15 @@ def create_submission(
     # Return updated submission
     return submissions_collection.find_one(
         {
-            "submission_id": submission.submission_id
+            "submission_id":
+                submission.submission_id
         }
     )
 
+
+# =========================================
+# GET SUBMISSION BY ID
+# =========================================
 
 def get_submission_by_id(
     submission_id: str,
@@ -187,6 +336,10 @@ def get_submission_by_id(
     return submission
 
 
+# =========================================
+# GET USER SUBMISSIONS
+# =========================================
+
 def get_user_submissions(
     user_id: str,
 ):
@@ -200,3 +353,24 @@ def get_user_submissions(
             -1,
         )
     )
+
+
+# =========================================
+# GET LATEST SUBMISSION
+# =========================================
+
+def get_latest_submission_for_problem(
+    problem_id: int,
+    user_id: str,
+):
+    submission = submissions_collection.find_one(
+        {
+            "user_id": user_id,
+            "problem_id": problem_id,
+        },
+        sort=[
+            ("created_at", -1),
+        ],
+    )
+
+    return submission

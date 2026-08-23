@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 from app.database.mongodb import client, create_indexes
 from app.routers.auth import router as auth_router
 from app.routers.problem import router as problem_router 
@@ -9,6 +9,16 @@ from app.routers.progress import router as progress_router
 from app.routers.ai import router as ai_router
 app = FastAPI(
     title="AI Technical Interview Platform"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(user_router)
