@@ -9,6 +9,8 @@ An AI-powered technical interview and coding practice platform designed to help 
 ###  Authentication & User Management
 
 The platform includes a complete authentication and user management system.
+<img width="1902" height="977" alt="image" src="https://github.com/user-attachments/assets/26315d04-ab9d-43d5-8902-bd005bc35a82" />
+<img width="1896" height="982" alt="image" src="https://github.com/user-attachments/assets/4c3f9841-af22-4fce-b1b9-cdda5cf092f8" />
 
 Features:
 
@@ -60,6 +62,7 @@ Access Protected APIs
 ##  Problem Bank
 
 The platform provides a structured coding problem management system.
+<img width="1886" height="977" alt="image" src="https://github.com/user-attachments/assets/32ae7e52-fd76-4212-a4eb-2f345d47b37a" />
 
 Each problem can contain:
 
@@ -93,6 +96,7 @@ Currently supported problem configurations include:
 - Java
 
 ---
+<img width="1895" height="972" alt="image" src="https://github.com/user-attachments/assets/d201aae0-4e85-41ac-bc53-84cc95183974" />
 
 ##  Code Submission System
 
@@ -129,6 +133,7 @@ Example submission result:
   "error": null
 }
 ```
+<img width="835" height="505" alt="image" src="https://github.com/user-attachments/assets/174046d0-23a5-4279-8b4f-bdfe3f57ec58" />
 
 ---
 
@@ -214,6 +219,7 @@ Not Started
 Attempted
 Solved
 ```
+<img width="1855" height="947" alt="image" src="https://github.com/user-attachments/assets/b03f7ad3-fd25-4b4f-88b9-98bd168f1623" />
 
 ---
 
