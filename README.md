@@ -29,6 +29,7 @@ Features:
 ##  Email OTP Verification
 
 User email verification is handled using OTP.
+<img width="862" height="835" alt="image" src="https://github.com/user-attachments/assets/801c6285-244c-4824-a2e8-66cf3960fe29" />
 
 Features:
 
